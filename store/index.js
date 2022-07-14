@@ -1,6 +1,7 @@
 export const state = () => ({
   products: [],
   productLoading: false,
+  favoriteProducts: [],
 })
 
 export const getters = {
@@ -12,6 +13,9 @@ export const getters = {
   },
   getFetchProductLoading: (state) => (pending) => {
     return state.productLoading || (pending && state.products.length === 0)
+  },
+  getFavoriteProduct(state){
+    return state.favoriteProducts;
   }
 }
 
@@ -21,6 +25,12 @@ export const mutations = {
   },
   toggleProductLoading(state){
     state.productLoading = !state.productLoading;
+  },
+  addFavoriteProduct(state, product){
+    state.favoriteProducts = state.favoriteProducts.concat(product);
+  },
+  removeFavoriteProduct(state, product){
+    state.favoriteProducts = state.favoriteProducts.filter(item => item.id !== product.id);
   }
 }
 

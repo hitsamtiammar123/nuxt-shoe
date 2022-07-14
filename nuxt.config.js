@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'test-project',
+    title: 'Nuxt Shoe',
     htmlAttrs: {
       lang: 'en',
     },
@@ -14,11 +14,14 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
+  server: {
+    port: 3999
+  },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [ '~/plugins/numbro.js'],
+  plugins: [ '~/plugins/numbro.js', { src: '~/plugins/vuex-persist', ssr: false }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -38,6 +41,7 @@ export default {
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
     '@nuxtjs/moment',
+    'vue-sweetalert2/nuxt'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

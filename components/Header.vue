@@ -1,6 +1,6 @@
 <template>
  <b-navbar sticky variant="primary" type="dark">
-    <b-navbar-brand to="/" tag="NavLink" class="mb-0">Ecommerce Hehe</b-navbar-brand>
+    <b-navbar-brand to="/" tag="NavLink" class="mb-0">Nuxt Shoe</b-navbar-brand>
     <b-navbar-nav class="ml-auto">
         <b-nav-item to="/favorite-product" tag="NavLink">
           Favorite Product

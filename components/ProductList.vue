@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex flex-column product-list">
       <h2 class="text-left mb-5 text-primary main-title">{{title}}</h2>
-      <div v-if="!Loading" class="d-flex flex-row col-10 flex-wrap justify-content-start">
+      <div v-if="!loading" class="d-flex flex-row col-10 flex-wrap justify-content-start">
         <b-card
           v-for="item in products.slice(0, limit)"
           :key="item.id"

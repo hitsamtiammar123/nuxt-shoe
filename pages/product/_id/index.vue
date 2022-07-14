@@ -1,8 +1,8 @@
 <template>
   <b-row v-if="!getFetchProductLoading" class="product">
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column image-content">
       <img class="product-image" :src="product.image_url" />
-      <b-button class="mt-2" variant="primary">Add to favorite</b-button>
+      <b-button class="mt-2 btn-favorite" variant="primary" @click="addToFavorite">{{ !isFavorite ? 'Add to favorite' : 'Remove from favorite'}}</b-button>
     </div>
     <div class="ml-5 d-flex flex-column product-detail">
       <h2>{{product.name}}</h2>
@@ -46,8 +46,33 @@ export default {
   computed: {
     getFetchProductLoading(){
       return this.$store.getters.getFetchProductLoading(this.$fetchState.pending);
+    },
+    isFavorite(){
+      return this.$store.state.favoriteProducts.findIndex((item) => item.id === this.product.id) !== -1;
     }
   },
+  methods: {
+    addToFavorite(){
+      this.$swal({
+        title: !this.isFavorite ? 'Are you sure want to add to favorite?' : 'Are you sure want to remove from favorite?',
+        text: !this.isFavorite ? "Your product will display on favorite list!" : "Your product will be removed on favorite list!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if(result.isConfirmed){
+          if(!this.isFavorite){
+            this.$store.commit('addFavoriteProduct', this.product);
+          }else{
+            this.$store.commit('removeFavoriteProduct', this.product);
+          }
+          this.$router.push('/favorite-product');
+        }
+      })
+    }
+  }
 
 }
 </script>
@@ -59,6 +84,19 @@ export default {
       width: 250px;
       height: 300px;
       object-fit: cover;
+    }
+
+    .image-content{
+      @media screen and (max-width: 425px) {
+        width: 100%;
+        margin-bottom: 50px;
+        padding: 0px 20px;
+        align-items: center
+      }
+
+      .btn-favorite{
+        width: 100%;
+      }
     }
 
     .product-detail{

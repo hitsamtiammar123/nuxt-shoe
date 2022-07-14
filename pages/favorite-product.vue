@@ -1,10 +1,15 @@
 <template>
-  <ProductList title="My Favorite Product" />
+  <ProductList :products="products" title="My Favorite Product" />
 </template>
 
 <script>
 export default {
-  name: 'NuxtFavoriteProduct'
+  name: 'NuxtFavoriteProduct',
+  computed: {
+    products(){
+      return this.$store.state.favoriteProducts;
+    }
+  }
 }
 </script>
 
